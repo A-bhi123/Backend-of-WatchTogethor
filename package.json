@@ -2,6 +2,17 @@
   "name": "watchtogether-backend",
   "version": "2.0.0",
   "description": "WatchTogether backend - signaling + room management only",
+  "homepage": "https://github.com/A-bhi123/Backend-of-WatchTogethor#readme",
+  "bugs": {
+    "url": "https://github.com/A-bhi123/Backend-of-WatchTogethor/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/A-bhi123/Backend-of-WatchTogethor.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
