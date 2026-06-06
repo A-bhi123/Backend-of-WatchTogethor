@@ -23,6 +23,17 @@ const ALLOWED_ORIGINS = [
   'http://localhost:5173'
 ];
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'https://watch-together-frontend-lilac.vercel.app');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Origin,X-Requested-With,Content-Type,Accept,Authorization');
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+  next();
+}); 
+
 const io = new Server(server, {
   cors: {
     origin: ALLOWED_ORIGINS,
