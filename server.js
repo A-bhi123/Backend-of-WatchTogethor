@@ -18,9 +18,14 @@ const errorHandler = require('./src/middleware/errorHandler');
 const app = express();
 const server = http.createServer(app);
 
+const ALLOWED_ORIGINS = [
+  'https://watch-together-frontend-lilac.vercel.app',
+  'http://localhost:5173'
+];
+
 const io = new Server(server, {
   cors: {
-    origin: ['https://watch-together-frontend-lilac.vercel.app', 'http://localhost:5173'],
+    origin: ALLOWED_ORIGINS,
     methods: ['GET', 'POST'],
     credentials: true,
   },
@@ -31,7 +36,7 @@ connectDB();
 app.use(helmet());
 app.use(compression());
 app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
-app.use(cors({ origin: process.env.CLIENT_URL || 'http://localhost:5173', credentials: true }));
+app.use(cors({ origin: ALLOWED_ORIGINS, credentials: true }));
 app.use(express.json({ limit: '1mb' }));
 app.use(express.urlencoded({ extended: true }));
 app.use('/api/', globalRateLimiter);
@@ -49,5 +54,5 @@ const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => {
   console.log(`\n🎬 WatchTogether Server running on port ${PORT}`);
   console.log(`📡 Environment: ${process.env.NODE_ENV || 'development'}`);
-  console.log(`🔗 Client URL: ${process.env.CLIENT_URL || 'http://localhost:5173'}\n`);
+  console.log(`🔗 Client URL: ${ALLOWED_ORIGINS[0]}\n`);
 });
