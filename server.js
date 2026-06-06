@@ -33,7 +33,10 @@ const io = new Server(server, {
 
 connectDB();
 
-app.use(helmet());
+app.use(helmet({
+  crossOriginResourcePolicy: false,
+  crossOriginOpenerPolicy: false,
+}));
 app.use(compression());
 app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 app.use(cors({ origin: ALLOWED_ORIGINS, credentials: true }));
